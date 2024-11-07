@@ -42,7 +42,7 @@ const Login = () => {
         formdata.append("bio", bio.value);
         formdata.append("username", username.value);
         formdata.append("password", password.value);
-
+        console.count("first");
         try {
             const { data } = await axios.post(
                 `${server}/api/v1/user/newlogin`,
@@ -54,11 +54,13 @@ const Login = () => {
                     },
                 }
             );
-
+            console.count("first");
             dispatch(userExists(data.user));
             toast.success(data.message);
         } catch (error) {
+            console.count("first");
             toast.error(error?.response?.data?.message || "Something Went Wrong");
+            console.count("first");
         }finally{
             setIsLoading(false);
         }
@@ -70,7 +72,7 @@ const Login = () => {
         e.preventDefault();
 
         const toastId = toast.loading("Logging In...");
-
+        console.count("first");
         setIsLoading(true);
         const config = {
             withCredentials: true,
@@ -78,7 +80,7 @@ const Login = () => {
                 "Content-Type": "application/json",
             },
         };
-
+        console.count("first");
         try {
             const { data } = await axios.post(
                 `${server}/api/v1/user/login`,
@@ -88,14 +90,19 @@ const Login = () => {
                 },
                 config
             );
+
             dispatch(userExists(data.user));
             toast.success(data.message, {
                 id: toastId,
             });
             navigate("/");
+            console.count("first");
             window.location.reload();
+            console.count("first");
         } catch (error) {
+            console.count("first");
             toast.error(error?.response?.data?.message || "Something Went Wrong");
+            console.count("first");
         }
         finally {
             setIsLoading(false);
